@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Globalization;
 
 namespace validation
 {
@@ -16,8 +17,14 @@ namespace validation
 
         protected void btnCalculate_Click(object sender, EventArgs e)
         {
-            Decimal tip = Convert.ToDecimal(txtAmount.Text, System.Globalization.CultureInfo.InvariantCulture) * Convert.ToDecimal(ddlPercent.SelectedValue, System.Globalization.CultureInfo.InvariantCulture);
+            Decimal tip = Convert.ToDecimal(txtAmount.Text, CultureInfo.InvariantCulture) * Convert.ToDecimal(ddlPercent.SelectedValue, CultureInfo.InvariantCulture);
             lblTip.Text = tip.ToString("c");
+
+            Decimal total = Convert.ToDecimal(txtAmount.Text, CultureInfo.InvariantCulture) + tip;
+            lblTotal.Text = total.ToString("c");
+
+            pnlResults.Visible = true;
+            
         }
     }
 }
